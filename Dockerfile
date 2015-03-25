@@ -9,6 +9,8 @@ RUN gunzip /tmp/logstash.tar.gz && tar xvf /tmp/logstash.tar -C /opt && mv /opt/
 RUN wget http://s3.amazonaws.com/replicated-cdn/logstash/$LSCONTRIB_PKG_NAME.tar.gz -O /tmp/logstash-contrib.tar.gz
 RUN gunzip /tmp/logstash-contrib.tar.gz && tar xvf /tmp/logstash-contrib.tar -C /opt && cp -a /opt/$LSCONTRIB_PKG_NAME/* /opt/logstash/ && rm -rf /opt/$LSCONTRIB_PKG_NAME && rm -rf /tmp/logstash-contrib.tar
 
+RUN wget http://s3.amazonaws.com/replicated-cdn/logstash-output-rollbar/rollbar.rb -O /opt/logstash/lib/logstash/outputs/rollbar.rb
+
 ADD ./files/start_logstash.sh /usr/local/bin/start_logstash.sh
 RUN chmod +x /usr/local/bin/start_logstash.sh
 ADD ./files/collectd-types.db /opt/collectd-types.db
